@@ -1,9 +1,9 @@
 "use client";
 
-import HeroNav from "@/components/heroComp/heroNav";
 import HeroCarousel from "@/components/heroComp/heroCarousel";
 import HeroCircles from "@/components/heroComp/heroCircle";
 import ClockStatus from "@/components/heroComp/clockStatus";
+import ExperienceTimeline from "@/components/expComp/experienceTimeline";
 import { motion } from "framer-motion";
 import { useState } from "react";
 
@@ -20,7 +20,7 @@ export default function HeroPage() {
 
   return (
     <div
-      className="w-full h-screen flex flex-col overflow-hidden relative"
+      className="w-full min-h-screen flex flex-col overflow-x-hidden relative"
       style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
     >
       {/* ── Mesh gradient background ── */}
@@ -55,16 +55,26 @@ export default function HeroPage() {
         }}
       />
 
-      
-      {/* ── Top-right: Carousel + Nav ── */}
+      {/* ── Top-right column: Carousel + Experience Timeline ── */}
       <motion.div
         initial={{ opacity: 0, x: 40 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.9, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
         className="absolute top-0 right-0 m-6 flex flex-col items-end gap-4"
+        style={{ maxHeight: "calc(100vh - 48px)", overflowY: "auto", overflowX: "visible" }}
       >
-        <HeroCarousel />
-        <HeroNav />
+        {/* Scrollbar hide */}
+        <style>{`
+          .right-col::-webkit-scrollbar { display: none; }
+          .right-col { scrollbar-width: none; }
+        `}</style>
+        <div
+          className="right-col flex flex-col items-end gap-4"
+          style={{ maxHeight: "calc(100vh - 48px)", overflowY: "auto", paddingRight: 2 }}
+        >
+          <HeroCarousel />
+          <ExperienceTimeline />
+        </div>
       </motion.div>
 
       {/* ── Top-left: Name + Titles + Clock/Status ── */}
@@ -84,7 +94,7 @@ export default function HeroPage() {
           transition={{ duration: 0.3 }}
           style={{ fontSize: "1.35rem", fontWeight: 600, letterSpacing: "0.01em" }}
         >
-          James Yuri Avila
+          James Yuri R. Avila
         </motion.span>
 
         <motion.div
@@ -122,16 +132,11 @@ export default function HeroPage() {
           ))}
         </motion.div>
 
-        {/* Clock + status — sits naturally below the roles */}
+        {/* Clock + status */}
         <div style={{ marginTop: 14 }}>
           <ClockStatus />
         </div>
       </motion.div>
-
-      {/* ── CENTER: Big circle + small circles ── */}
-      <div className="absolute inset-0 flex items-center justify-center">
-        <HeroCircles />
-      </div>
 
       {/* ── Bottom section ── */}
       <div className="absolute bottom-0 left-0 right-0 mx-6 mb-6">
@@ -160,12 +165,12 @@ export default function HeroPage() {
             transition: "filter 0.4s",
           }}
         >
-          MY
+          Full Stack
           <br />
-          PORTFOLIO
+          AI DEVELOPER
         </motion.h1>
 
-        {/* Inline separator + Yurei Yuri */}
+        {/* Inline separator + handle */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -205,7 +210,7 @@ export default function HeroPage() {
               transition: "color 0.3s, text-shadow 0.3s",
             }}
           >
-            Yurei Yuri
+            @YureiYuri
           </motion.span>
         </motion.div>
       </div>

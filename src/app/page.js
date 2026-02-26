@@ -1,9 +1,10 @@
+import ExperiencePage from "@/pages/experience/exp";
 import HeroPage from "@/pages/hero/hero";
 import Image from "next/image";
 
 export default function Home() {
   return (
-    <div className="w-full h-full flex flex-col">
+    <div className="">
       <HeroPage />
     </div>
   );
